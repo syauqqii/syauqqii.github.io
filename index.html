@@ -1,19 +1,777 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>~Qii</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container">
-      <div class="container-fluid">
-        <h1>
-          ./0x
-        </h1>
-      </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimas Syauqi Syafa | Backend Engineer</title>
+    <meta name="description" content="Backend Engineer & Security Enthusiast - Portfolio Dimas Syauqi Syafa">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-primary: #0a0a0a;
+            --dark-secondary: #1a1a1a;
+            --dark-tertiary: #2a2a2a;
+            --gold: #d4af37;
+            --gold-light: #e6c965;
+            --gold-dark: #b8982f;
+            --white: #f5f5f5;
+            --white-dim: #c5c5c5;
+            --spacing-unit: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-primary);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Low Poly Background */
+        .low-poly-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dark-tertiary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 4);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white-dim);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .hero-subtitle::before {
+            content: '';
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            line-height: 1.1;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--white-dim);
+            max-width: 600px;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 6);
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--white-dim);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Section Styles */
+        section {
+            padding: calc(var(--spacing-unit) * 15) 0;
+            border-top: 1px solid var(--dark-tertiary);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .section-title::before {
+            content: '';
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        .section-subtitle {
+            color: var(--white-dim);
+            font-size: 1.1rem;
+            margin-bottom: calc(var(--spacing-unit) * 6);
+            max-width: 700px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: calc(var(--spacing-unit) * 8);
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--white-dim);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            line-height: 1.8;
+        }
+
+        .about-highlights {
+            list-style: none;
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        .about-highlights li {
+            padding: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            background: var(--dark-secondary);
+            border-left: 3px solid var(--gold);
+            transition: transform 0.3s ease;
+        }
+
+        .about-highlights li:hover {
+            transform: translateX(10px);
+        }
+
+        .about-highlights strong {
+            color: var(--gold);
+            display: block;
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        .skill-category {
+            background: var(--dark-secondary);
+            padding: calc(var(--spacing-unit) * 4);
+            border: 1px solid var(--dark-tertiary);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: var(--gold);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .skill-category h3::before {
+            content: '▸';
+            font-size: 1.5rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: calc(var(--spacing-unit) * 1.5) 0;
+            color: var(--white-dim);
+            border-bottom: 1px solid var(--dark-tertiary);
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        .skill-list li::before {
+            content: '◆';
+            color: var(--gold);
+            font-size: 0.6rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: calc(var(--spacing-unit) * 4);
+        }
+
+        .project-card {
+            background: var(--dark-secondary);
+            border: 1px solid var(--dark-tertiary);
+            padding: calc(var(--spacing-unit) * 4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        .project-lang {
+            color: var(--gold);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+            font-size: 0.85rem;
+            color: var(--white-dim);
+        }
+
+        .project-stats span::before {
+            margin-right: calc(var(--spacing-unit));
+        }
+
+        .project-description {
+            color: var(--white-dim);
+            margin: calc(var(--spacing-unit) * 2) 0;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: calc(var(--spacing-unit) * 2);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--gold-light);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: calc(var(--spacing-unit) * 4);
+            margin-top: calc(var(--spacing-unit) * 6);
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+            padding: calc(var(--spacing-unit) * 3);
+            background: var(--dark-secondary);
+            border: 1px solid var(--dark-tertiary);
+            text-decoration: none;
+            color: var(--white-dim);
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .contact-link:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-secondary);
+            border-top: 1px solid var(--dark-tertiary);
+            padding: calc(var(--spacing-unit) * 4) 0;
+            text-align: center;
+            color: var(--white-dim);
+        }
+
+        .footer-quote {
+            font-style: italic;
+            color: var(--gold);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 3);
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--gold);
+            color: var(--dark-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Low Poly Background -->
+    <svg class="low-poly-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#d4af37;stop-opacity:0.3" />
+                <stop offset="100%" style="stop-color:#b8982f;stop-opacity:0.1" />
+            </linearGradient>
+        </defs>
+        <polygon points="0,0 800,200 600,400" fill="url(#grad1)"/>
+        <polygon points="800,200 1200,0 1400,300" fill="rgba(212,175,55,0.15)"/>
+        <polygon points="1400,300 1920,100 1920,500" fill="rgba(212,175,55,0.1)"/>
+        <polygon points="0,400 400,700 200,1080" fill="rgba(212,175,55,0.12)"/>
+        <polygon points="600,800 1000,1080 1400,900" fill="rgba(212,175,55,0.08)"/>
+        <polygon points="1400,900 1920,1080 1920,700" fill="rgba(212,175,55,0.15)"/>
+    </svg>
+
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <div class="logo">SYAUQI</div>
+            <ul class="nav-links">
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#skills">Keahlian</a></li>
+                <li><a href="#projects">Proyek</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-subtitle">Backend Engineer ▸ Security Enthusiast</div>
+                <h1 class="hero-title">
+                    Halo, Saya<br>
+                    <span class="highlight">Dimas Syauqi Syafa</span>
+                </h1>
+                <p class="hero-description">
+                    Merancang dan mengoptimalkan API, database, dan aplikasi server-side dengan fokus pada performa, skalabilitas, dan keamanan.
+                    Saat ini menyelesaikan pendidikan Computer Science di BINUS University.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">82</span>
+                        <span class="stat-label">Repositori</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">23</span>
+                        <span class="stat-label">Pengikut</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2025</span>
+                        <span class="stat-label">Lulus</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Tentang Saya</h2>
+            <p class="section-subtitle">
+                Backend Engineer dengan fondasi kuat dalam pengembangan web, arsitektur sistem, dan praktik keamanan terbaik.
+            </p>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Saya Dimas Syauqi Syafa, seorang Backend Engineer yang passionate dalam membangun sistem yang robust,
+                        scalable, dan secure. Dengan latar belakang Computer Science dari BINUS University, saya fokus pada
+                        pengembangan solusi backend yang efisien dan berkualitas tinggi.
+                    </p>
+                    <p>
+                        Filosofi saya sederhana: <em>"Otomatisasi itu seni, manual itu derita. Kalau bisa BOT yang kerja, kenapa..."</em>
+                        Saya percaya pada kekuatan otomatisasi dan efisiensi dalam setiap aspek pengembangan software.
+                    </p>
+                </div>
+                <div class="about-highlights">
+                    <li>
+                        <strong>Backend Development</strong>
+                        Merancang dan mengoptimalkan API, database, dan aplikasi server-side dengan fokus pada performa dan skalabilitas.
+                    </li>
+                    <li>
+                        <strong>System Architecture & Security</strong>
+                        Implementasi secure coding practices, API security, dan perencanaan infrastruktur yang aman.
+                    </li>
+                    <li>
+                        <strong>Problem Solver & Tech Explorer</strong>
+                        Passionate dalam menyelesaikan tantangan teknis, mempelajari teknologi baru, dan meningkatkan efisiensi sistem.
+                    </li>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Keahlian Teknis</h2>
+            <p class="section-subtitle">
+                Teknologi dan tools yang saya gunakan untuk membangun solusi berkualitas tinggi.
+            </p>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Backend Development</h3>
+                    <ul class="skill-list">
+                        <li>JavaScript / Node.js</li>
+                        <li>Python</li>
+                        <li>C# / .NET / ASP.NET Core</li>
+                        <li>REST API Design</li>
+                        <li>Database Design & Optimization</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <ul class="skill-list">
+                        <li>JavaScript</li>
+                        <li>Python</li>
+                        <li>C / C++</li>
+                        <li>C#</li>
+                        <li>AL (Dynamics 365)</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Security & Architecture</h3>
+                    <ul class="skill-list">
+                        <li>API Security</li>
+                        <li>Secure Coding Practices</li>
+                        <li>System Architecture</li>
+                        <li>Infrastructure Planning</li>
+                        <li>Security Best Practices</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <ul class="skill-list">
+                        <li>Git & GitHub</li>
+                        <li>Automation & Scripting</li>
+                        <li>Machine Learning Basics</li>
+                        <li>Microsoft Dynamics 365</li>
+                        <li>WhatsApp API Integration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Proyek Unggulan</h2>
+            <p class="section-subtitle">
+                Beberapa proyek yang telah saya kerjakan, dari automation hingga machine learning.
+            </p>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">WA Automation Chat</h3>
+                            <div class="project-lang">JavaScript</div>
+                        </div>
+                        <div class="project-stats">
+                            <span>★ 1</span>
+                            <span>⑂ 2</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Otomatisasi WhatsApp untuk Customer Service AI menggunakan Gemini API dan Backend Endpoint untuk Campaign Marketing.
+                        Mengintegrasikan AI untuk meningkatkan efisiensi layanan pelanggan.
+                    </p>
+                    <a href="https://github.com/syauqqii/WA-Automation-Chat" class="project-link" target="_blank">Lihat Proyek →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Predict Customer Traffic</h3>
+                            <div class="project-lang">Jupyter Notebook</div>
+                        </div>
+                        <div class="project-stats">
+                            <span>★ 0</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Proyek Machine Learning untuk memprediksi jumlah customer berdasarkan data cuaca dan promosi.
+                        Menggunakan algoritma ML untuk analisis prediktif business intelligence.
+                    </p>
+                    <a href="https://github.com/syauqqii/predict-customer-traffic" class="project-link" target="_blank">Lihat Proyek →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Starter API JavaScript</h3>
+                            <div class="project-lang">JavaScript</div>
+                        </div>
+                        <div class="project-stats">
+                            <span>★ 0</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Template foundational untuk membangun REST API menggunakan JavaScript.
+                        Menyediakan struktur dasar yang clean dan scalable untuk pengembangan API.
+                    </p>
+                    <a href="https://github.com/syauqqii/starter-api-javascript" class="project-link" target="_blank">Lihat Proyek →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">D365 Business Central AL</h3>
+                            <div class="project-lang">AL</div>
+                        </div>
+                        <div class="project-stats">
+                            <span>★ 0</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Learning project untuk Microsoft Dynamics 365 Business Central development.
+                        Eksplorasi enterprise resource planning (ERP) dan business application development.
+                    </p>
+                    <a href="https://github.com/syauqqii/D365-Business-Central-AL-Programming" class="project-link" target="_blank">Lihat Proyek →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">Sorting Algorithms C</h3>
+                            <div class="project-lang">C</div>
+                        </div>
+                        <div class="project-stats">
+                            <span>★ 0</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Aplikasi CLI lightweight yang mengimplementasikan algoritma sorting (Bubble, Merge, Quick Sort).
+                        Demonstrasi data structures dan algorithms fundamentals.
+                    </p>
+                    <a href="https://github.com/syauqqii/sorting_proj_c" class="project-link" target="_blank">Lihat Proyek →</a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div>
+                            <h3 class="project-title">HistoryWifi</h3>
+                            <div class="project-lang">Python</div>
+                        </div>
+                        <div class="project-stats">
+                            <span>★ 1</span>
+                        </div>
+                    </div>
+                    <p class="project-description">
+                        Tool untuk melihat history WiFi yang dirancang khusus untuk sistem Windows.
+                        Utility automation untuk network administration dan troubleshooting.
+                    </p>
+                    <a href="https://github.com/syauqqii/HistoryWifi" class="project-link" target="_blank">Lihat Proyek →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Mari Terhubung</h2>
+                <p class="section-subtitle">
+                    Selalu terbuka untuk belajar, kolaborasi, dan proyek yang menarik. Mari kita bangun sesuatu yang luar biasa bersama!
+                </p>
+                <div class="contact-links">
+                    <a href="https://github.com/syauqqii" class="contact-link" target="_blank">
+                        <div class="contact-icon">⬡</div>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/dimas-syauqi-syafa" class="contact-link" target="_blank">
+                        <div class="contact-icon">◈</div>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="mailto:syauqqii@outlook.com" class="contact-link">
+                        <div class="contact-icon">✉</div>
+                        <span>Email</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-quote">"Otomatisasi itu seni, manual itu derita. Kalau bisa BOT yang kerja, kenapa..."</p>
+            <p>&copy; 2025 Dimas Syauqi Syafa. Dibuat dengan fokus pada kesederhanaan dan elegance.</p>
+        </div>
+    </footer>
+</body>
 </html>
