@@ -1,0 +1,96 @@
+/*
+  Semua nilai desain ada di file ini: warna, font, ukuran, jarak, durasi.
+  Ubah di sini, style.css tidak perlu disentuh.
+*/
+
+:root {
+  /* font (dimuat dari Google Fonts di index.html) */
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* ukuran teks */
+  --fs-base: 1.0625rem;
+  --fs-small: 0.875rem;
+  --fs-tiny: 0.78rem;
+  --fs-h2: 1.7rem;
+  --fs-h3: 1.65rem;
+  --fs-product: 2.3rem;
+  --fs-display: clamp(2.5rem, 6.4vw, 4.9rem);
+  --fs-mail: clamp(1.6rem, 4.2vw, 3rem);
+  --lh-body: 1.6;
+  --lh-tight: 1.08;
+  --lh-head: 1.2;
+  --ls-tight: -0.015em;
+  --ls-label: 0.08em;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 650;
+
+  /* jarak */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: 6.5rem;
+  --gutter: 1.5rem;
+
+  /* tata letak */
+  --page-max: 72rem;
+  --label-col: 13rem;
+  --meta-col: 11rem;
+  --row-title-col: 17rem;
+  --hero-photo-width: 10rem;
+  --hero-gap: 4rem;
+  --list-indent: 1.1rem;
+  --header-h: 4.5rem;
+  --z-header: 50;
+  --tap-size: 2.75rem;
+  --menu-rot: 45deg;
+
+  /* garis, sudut, foto */
+  --rule-width: 1px;
+  --rule-strong: 2px;
+  --radius: 0.375rem;
+  --photo-offset: 0.9rem;
+  --photo-ratio: 4 / 5;
+  --photo-filter: none;
+  --underline-offset: 0.2em;
+
+  /* gerak */
+  --dur-fast: 160ms;
+  --dur-med: 280ms;
+  --dur-slow: 700ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --reveal-shift: 0.9rem;
+  --stagger: 90ms;
+  --nudge: 0.2rem;
+}
+
+/* palet terang */
+:root,
+:root[data-theme="light"] {
+  --c-bg: #f4f1ea;
+  --c-surface: #ebe6db;
+  --c-ink: #15130f;
+  --c-muted: #6a655a;
+  --c-line: #d6d0c2;
+  --c-accent: #d6402a;
+  --c-accent-ink: #ffffff;
+  --c-select-bg: #f1c3b8;
+  --c-select-text: #15130f;
+}
+
+/* palet gelap */
+:root[data-theme="dark"] {
+  --c-bg: #131210;
+  --c-surface: #1d1b18;
+  --c-ink: #efeae0;
+  --c-muted: #a09a8c;
+  --c-line: #34312b;
+  --c-accent: #ff6a4d;
+  --c-accent-ink: #1a0d09;
+  --c-select-bg: #5a2a20;
+  --c-select-text: #fff1ec;
+}
